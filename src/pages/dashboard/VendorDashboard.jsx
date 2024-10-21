@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DashboardLayout from '../../layouts/DashboardLayout';
 
 const initialAdverts = [
   {
@@ -78,7 +79,8 @@ const EditAdvertForm = ({ advert, onSave, onCancel }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+//  <DashboardLayout>
+     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Edit Advert</h2>
         <form onSubmit={handleSubmit}>
@@ -122,6 +124,7 @@ const EditAdvertForm = ({ advert, onSave, onCancel }) => {
         </form>
       </div>
     </div>
+//  </DashboardLayout>
   );
 };
 

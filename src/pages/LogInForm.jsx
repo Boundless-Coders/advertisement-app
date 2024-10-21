@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import RootLayout from '../layouts/RootLayout';
 
-const SignInForm = () => {
+const LogInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,20 +12,18 @@ const SignInForm = () => {
     console.log('Password:', password);
   };
 
-  const handleFacebookSignIn = () => {
-    // Add your Facebook sign-in logic here
-    console.log('Sign in with Facebook');
-  };
 
-  const handleGoogleSignIn = () => {
+
+  const handleGoogleLogIn = () => {
     // Add your Google sign-in logic here
-    console.log('Sign in with Google');
+    console.log('Login with Google');
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  <RootLayout>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 mx-24 my-10">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Email:</label>
@@ -50,7 +49,7 @@ const SignInForm = () => {
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
           >
-            Sign In
+            Login
           </button>
         </form>
         <div className="flex items-center justify-between mt-6">
@@ -59,17 +58,12 @@ const SignInForm = () => {
           <hr className="flex-grow border-gray-300" />
         </div>
         <div className="mt-4 flex flex-col space-y-2">
+          
           <button
-            onClick={handleFacebookSignIn}
-            className="flex items-center justify-center bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
-          >
-            Sign in with Facebook
-          </button>
-          <button
-            onClick={handleGoogleSignIn}
+            onClick={handleGoogleLogIn}
             className="flex items-center justify-center bg-red-600 text-white p-2 rounded hover:bg-red-700 transition"
           >
-            Sign in with Google
+            Login with Google
           </button>
 
         </div>
@@ -87,7 +81,8 @@ const SignInForm = () => {
           </div>
       </div>
     </div>
+  </RootLayout>
   );
 };
 
-export default SignInForm;
+export default LogInForm;
