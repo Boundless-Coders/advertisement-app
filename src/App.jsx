@@ -1,7 +1,7 @@
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
-import Home from './pages/Home'
+
 import DashboardLayout from './layouts/DashboardLayout'
 import Overview from './pages/dashboard/Overview'
 import Settings from './pages/dashboard/Settings'
@@ -12,12 +12,13 @@ import LogInForm from './pages/LogInForm'
 import RegisterForm from './pages/RegisterForm'
 import VendorDashboard from './pages/dashboard/VendorDashboard'
 import VendorForm from './pages/VendorForm'
+import HomePage from './pages/HomePage'
 
 function App() {
   const router = createBrowserRouter([
     {
       path:"/",
-      element: <Home/>,
+      element: <HomePage/>,
     },
     {
       path:"/login",
