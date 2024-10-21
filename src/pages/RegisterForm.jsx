@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import RootLayout from '../layouts/RootLayout';
 
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
@@ -18,10 +19,7 @@ const RegisterForm = () => {
     // Continue with registration logic
   };
 
-  const handleFacebookSignIn = () => {
-    // Add your Facebook sign-in logic here
-    console.log('Register with Facebook');
-  };
+ 
 
   const handleGoogleSignIn = () => {
     // Add your Google sign-in logic here
@@ -29,7 +27,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <RootLayout>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 mx-24 my-10">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={handleSubmit}>
@@ -76,12 +75,7 @@ const RegisterForm = () => {
           <hr className="flex-grow border-gray-300" />
         </div>
         <div className="mt-4 flex flex-col space-y-2">
-          <button
-            onClick={handleFacebookSignIn}
-            className="flex items-center justify-center bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
-          >
-            Register with Facebook
-          </button>
+          
           <button
             onClick={handleGoogleSignIn}
             className="flex items-center justify-center bg-red-600 text-white p-2 rounded hover:bg-red-700 transition"
@@ -92,13 +86,14 @@ const RegisterForm = () => {
         <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/signin" className="text-green-500 hover:underline">
-              Signin here
+              <Link to="/login" className="text-green-500 hover:underline">
+              Login here
               </Link>
             </p>
           </div>
       </div>
     </div>
+    </RootLayout>
   );
 };
 
