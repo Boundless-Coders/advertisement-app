@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router
+import { Link } from 'react-router-dom'; 
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,10 +73,10 @@ const Sidebar = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 p-6 bg-gray-100">
-        <h1 className="text-3xl font-semibold mb-4">Welcome, {vendor.name}</h1>
+      {/* <div className="flex-1 p-6 bg-gray-100">
+        <h1 className="text-3xl font-semibold mb-4">Welcome, {vendor.name}</h1> */}
         {/* Main content goes here */}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

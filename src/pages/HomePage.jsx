@@ -3,6 +3,14 @@ import heroImage from "../assets/images/hero.jpg"
 import pic from "../assets/images/xiaomi-mobiles.jpg";
 import { useState } from "react";
 import RootLayout from "../layouts/RootLayout";
+import brown from "../assets/images/brown.jpg";
+import shirt from "../assets/images/shirt.jpg";
+import fur from "../assets/images/fur.jpg";
+import dress from "../assets/images/dress.jpg";
+import car from "../assets/images/benz.jpg";
+import phone from "../assets/images/vivo.jpg";
+import laptop from "../assets/images/lapi.webp"
+
 
 const HomePage = () => {
   const [query, setQuery] = useState(""); 
@@ -117,33 +125,53 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Additional Images Row */}
+      
       <div >
-        <div className="flex justify-center items-center gap-x-8 mt-6">
+        <div className=" flex flex-wrap gap-6 p-4 justify-center items-center gap-x-8 mt-6">
           
-          {/* Image 1 */}
-          <div className=" bg-white p-6 shadow-lg rounded-lg text-center">
-            <img src={pic} alt="Item 1" className="w-32 h-32 object-cover rounded-lg"/>
-            <h3 className="text-xl font-bold mb-2">Item 1</h3>
+          
+          <div>
+            <img src={pic} alt="Item 1" className="w-60 h-60  rounded-lg"/> 
+            <p className="text-xl font-bold mb-2">Item 1</p>
+            </div>
+         
+          
+          <div >
+            <img src={brown} alt="Item 2" className="w-60 h-60  rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 2</p>
           </div>
 
-          {/* Image 2 */}
-          <div className="box bg-white p-6 shadow-lg rounded-lg text-center">
-            <img src="/path-to-your-image/image2.jpg" alt="Item 2" className="w-32 h-32 object-cover rounded-lg"/>
-            <h3 className="text-xl font-bold mb-2">Item 2</h3>
+         
+          <div >
+            <img src={shirt} alt="Item 3" className="w-60 h-60 rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 3</p>
           </div>
 
-          {/* Image 3 */}
-          <div className="box bg-white p-6 shadow-lg rounded-lg text-center">
-            <img src="/path-to-your-image/image3.jpg" alt="Item 3" className="w-32 h-32 object-cover rounded-lg"/>
-            <h3 className="text-xl font-bold mb-2">Item 3</h3>
-          </div>
+          
+          <div>
+            <img src={fur} alt="Item 4" className="w-60 h-60 rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 4</p>
+            </div>
 
-          {/* Image 4 */}
-          <div className="box bg-white p-6 shadow-lg rounded-lg text-center">
-            <img src="/path-to-your-image/image4.jpg" alt="Item 4" className="w-32 h-32 object-cover rounded-lg"/>
-            <h3 className="text-xl font-bold mb-2">Item 4</h3>
-          </div>
+          <div>
+            <img src={dress} alt="Item 5" className="w-60 h-60 rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 5</p>
+            </div>
+            
+          <div>
+            <img src={car} alt="Item 6" className="w-60 h-60 rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 6</p>
+            </div>
+
+          <div>
+            <img src={phone} alt="Item 7" className="w-60 h-60 rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 7</p>
+            </div>
+
+          <div>
+            <img src={laptop} alt="Item 8" className="w-60 h-60 rounded-lg"/>
+            <p className="text-xl font-bold mb-2">Item 8</p>
+            </div>
 
         </div>
       </div>
