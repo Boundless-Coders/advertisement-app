@@ -1,22 +1,44 @@
-import { useState } from 'react';
 import RootLayout from '../layouts/RootLayout';
 import { Link } from 'react-router-dom';
+import { apiSignup } from '../services/auth';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const VendorRegisterForm = () => {
-  const [vendorName, setVendorName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [businessName, setBusinessName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [businessAddress, setBusinessAddress] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Vendor Name:', vendorName);
-    console.log('Email:', email);
-    console.log('Business Name:', businessName);
-    console.log('Contact Number:', contactNumber);
-    console.log('Business Address:', businessAddress);
+    const [loading, setLoading] = useState(true)
+const navigate = useNavigate()
+  const handleSubmit = async (event) => {
+    event.preventDefault() // prevent the page from reloading
+
+    try {
+        
+        //prepare data to be sent to backend
+        setLoading(true)
+        const formData = new FormData(event.target) // takes data from the form
+
+        const name = formData.get("name")
+        const email = formData.get("email")
+        const password = formData.get("password")
+        const contactNumber = formData.get("contactNumber")
+        const businessName = formData.get("businessName")
+        const businessAddress = formData.get("businessAddress")
+         const role = formData.get("role")
+        console.log("name", name)
+
+
+        const payload = {name, email, password, role:"vendor"}
+        const response = await apiSignup(payload)
+        console.log(response.data)
+        navigate("/login")
+        
+    } catch (error) {
+       console.log(error) 
+    } finally{
+        setLoading(false)
+    }
+   
+    
   };
 
   return (
@@ -29,15 +51,15 @@ const VendorRegisterForm = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700">
-                Vendor Name
+                Name
               </label>
               <input
                 type="text"
-                value={vendorName}
-                onChange={(e) => setVendorName(e.target.value)}
+               
+                name='name'
                 required
                 className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
-                placeholder="Enter your vendor name"
+                placeholder="Enter your name"
               />
             </div>
             <div className="mb-6">
@@ -46,8 +68,8 @@ const VendorRegisterForm = () => {
               </label>
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+               
+                name='email'
                 required
                 className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
                 placeholder="Enter your email"
@@ -59,62 +81,20 @@ const VendorRegisterForm = () => {
               </label>
               <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+               
+                name='password'
                 required
                 className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
                 placeholder="Enter your password"
               />
             </div>
 
-            {/* Grouping Contact Number and Business Name horizontally */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Contact Number
-                </label>
-                <input
-                  type="text"
-                  value={contactNumber}
-                  onChange={(e) => setContactNumber(e.target.value)}
-                  required
-                  className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
-                  placeholder="Enter your contact number"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Business Name
-                </label>
-                <input
-                  type="text"
-                  value={businessName}
-                  onChange={(e) => setBusinessName(e.target.value)}
-                  required
-                  className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
-                  placeholder="Enter your business name"
-                />
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700">
-                Business Address
-              </label>
-              <textarea
-                value={businessAddress}
-                onChange={(e) => setBusinessAddress(e.target.value)}
-                required
-                className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
-                placeholder="Enter your business address"
-              />
-            </div>
-
+            
             <button
               type="submit"
               className="w-full bg-blue-600 text-white p-3 rounded-md shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200"
             >
-              Register
+             {loading ? "Loading..." : "Register"} 
             </button>
           </form>
           <div className="mt-6 text-center">

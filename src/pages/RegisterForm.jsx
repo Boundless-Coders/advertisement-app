@@ -1,26 +1,46 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RootLayout from '../layouts/RootLayout';
+import { apiSignup } from '../services/auth';
 
 const RegisterForm = ({ role = 'user/vendor' }) => {  
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  
+  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
+  const handleSubmit = async (event) => {
+    event.preventDefault() // prevent the page from reloading
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Role:', role);
-    console.log('Password:', password);
-    // Continue with registration logic
-  };
+    try {
+        
+      //prepare data to be sent to backend
+      setLoading(true)
+      const formData = new FormData(event.target) // takes data from the form
 
-  const handleGoogleSignIn = () => {
-    
-    console.log('Register with Google');
-  };
+      const name = formData.get("name")
+      const email = formData.get("email")
+      const password = formData.get("password")
+      
+       const role = formData.get("role")
+      console.log("name", name)
 
+
+      const payload = {name, email, password, role:"user"}
+      const response = await apiSignup(payload)
+      console.log(response.data)
+      navigate("/login")
+      
+  } catch (error) {
+     console.log(error) 
+  } finally{
+      setLoading(false)
+  }
+ 
+  
+};
+
+  
+
+  
   return (
     <RootLayout>
       <div className="flex items-center justify-center min-h-screen bg-gray-100 mx-24 my-10">
@@ -40,30 +60,30 @@ const RegisterForm = ({ role = 'user/vendor' }) => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700">Name:</label>
-              <input
+              <input name='name'
                 type="text"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
+                
+                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
-              <input
+              <input name='email'
                 type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+               
+                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Password:</label>
-              <input
+              <input name='password'
                 type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                
+                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -80,15 +100,7 @@ const RegisterForm = ({ role = 'user/vendor' }) => {
             <span className="mx-4 text-gray-500">or</span>
             <hr className="flex-grow border-gray-300" />
           </div>
-          <div className="mt-4 flex flex-col space-y-2">
-            <button
-              onClick={handleGoogleSignIn}
-              className="flex items-center justify-center bg-red-600 text-white p-2 rounded-full hover:bg-red-700 transition w-10 h-10 mx-auto"
-              title="Register with Google"
-            >
-              G
-            </button>
-          </div>
+          
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
