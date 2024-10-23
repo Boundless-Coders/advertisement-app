@@ -14,13 +14,13 @@ const Navbar = () => {
           <a href="/" className='no-underline text-black'>Home</a>
         </li>
         <li>
-          <a href="/ads" className='no-underline text-black'>Ads</a>
+          <a href="/advert/:id" className='no-underline text-black'>Ads</a>
         </li>
         <li>
           <a href="/about" className='no-underline text-black'>About</a>
         </li>
         <li>
-          <a href="/contact" className='no-underline text-black'>Contact</a>
+          <a href="/footer" className='no-underline text-black'>Contact</a>
         </li>
       </ul>
 
@@ -30,7 +30,7 @@ const Navbar = () => {
           <a href="/register" className='no-underline text-black'> Register</a>
         </div>
         <button>
-          <a href="/post-ad" className='no-underline px-4 mr-8 ml-7 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg'>
+          <a href="/vendor" className='no-underline px-4 mr-8 ml-7 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg'>
             +Post Ad
           </a>
         </button>
