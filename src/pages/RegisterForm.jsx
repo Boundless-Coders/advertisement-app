@@ -43,7 +43,7 @@ const RegisterForm = ({ role = 'user/vendor' }) => {
   
   return (
     <RootLayout>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 mx-24 my-10">
+      <div className="flex items-center justify-center min-h-screen bg-gray-400 pt-32 pb-10">
         <div className="bg-white p-8 rounded-lg shadow-md w-96 relative">
          
           <div className="absolute top-4 right-4 text-sm font-semibold text-gray-600">

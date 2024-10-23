@@ -2,10 +2,10 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <nav className='flex justify-between items-center bg-slate-100 h-20 px-6 mx-20 mt-8'>
+    <nav className='flex justify-between items-center bg-slate-100  h-20  right-32 left-32 mt-4 z-50 rounded-md absolute '>
      
       <div className='logo'>
-        <h1 className='text-lg font-bold m-3'>CLASSYADS</h1>
+        <h1 className='text-lg font-bold m-3 ml-8'>CLASSYADS</h1>
       </div>
 
       
@@ -26,14 +26,14 @@ const Navbar = () => {
 
       <div className='flex gap-4'>
         <div>
-          <a href="/login" className='no-underline text-black'>Log In</a> / 
+          <a href="/login" className='no-underline text-black'>Login</a> / 
           <a href="/register" className='no-underline text-black'> Register</a>
         </div>
-        <div>
-          <a href="/post-ad" className='no-underline px-4 py-2 bg-green-500 text-white rounded-lg'>
-            +Post an Ad
+        <button>
+          <a href="/post-ad" className='no-underline px-4 mr-8 ml-7 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg'>
+            +Post Ad
           </a>
-        </div>
+        </button>
       </div>
     </nav>
   );
