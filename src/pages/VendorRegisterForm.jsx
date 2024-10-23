@@ -27,7 +27,7 @@ const navigate = useNavigate()
         console.log("name", name)
 
 
-        const payload = {name, email, password, role:"vendor"}
+        const payload = {name, contactNumber, email, password, role:"vendor"}
         const response = await apiSignup(payload)
         console.log(response.data)
         navigate("/login")
@@ -86,6 +86,20 @@ const navigate = useNavigate()
                 required
                 className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
                 placeholder="Enter your password"
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700">
+                Contact Number
+              </label>
+              <input
+                type="text"
+               
+                name='contactNumber'
+                required
+                className="mt-2 p-3 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+                placeholder=""
               />
             </div>
 

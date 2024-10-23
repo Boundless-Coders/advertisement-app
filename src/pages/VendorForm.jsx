@@ -1,42 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
+import axios from 'axios'; // Ensure you have axios installed
 
 const VendorForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
-  const [price, setPrice] = useState('');
-  const [category, setCategory] = useState('');
-  const [subCategory, setSubCategory] = useState('');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  // Define categories and their corresponding sub-categories
-  const categories = {
-    electronics: ['Mobile Phones', 'Laptops'],
-    furniture: ['Tables', 'Sofas'],
-    fashion: ['Bags', 'Clothing'],
-    toys: ['Educational', 'Outdoor', 'Indoor'],
-    vehicles: ['Fiction', 'Non-Fiction', 'Textbooks'],
-  };
+    const formData = new FormData(event.target); // Capture the form data
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    // Get values directly using FormData.get()
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const image = formData.get('image');
+    const price = formData.get('price');
+    const category = formData.get('category');
 
-    // Create form data to handle image upload
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('image', image);
-    formData.append('price', price);
-    formData.append('category', category);
-    formData.append('subCategory', subCategory);
+    // Log the values for debugging
+    console.log('Title:', title);
+    console.log('Description:', description);
+    console.log('Image:', image);
+    console.log('Price:', price);
+    console.log('Category:', category);
 
-    // Add your submission logic here (e.g., API call)
-    console.log('Form Data:', formData);
-  };
-
-  const handleCategoryChange = (e) => {
-    const selectedCategory = e.target.value;
-    setCategory(selectedCategory);
-    setSubCategory(''); // Reset sub-category when category changes
+    // Perform the submission logic (e.g., API call)
+    try {
+      // Make sure to adjust the URL and request method based on your backend setup
+      const response = await axios.post('http://localhost:6060/adverts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      // Alert success message
+      alert('Advert posted successfully!');
+      console.log('Response:', response.data); // Log the response for debugging
+    } catch (error) {
+      // Alert error message
+      alert('Error posting advert. Please try again.');
+      console.error('Error:', error.response ? error.response.data : error.message); // Log error details
+    }
   };
 
   return (
@@ -48,8 +49,7 @@ const VendorForm = () => {
             <label className="block text-gray-700">Title:</label>
             <input
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              name="title" // Added name attribute for FormData
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -57,8 +57,7 @@ const VendorForm = () => {
           <div className="mb-4">
             <label className="block text-gray-700">Description:</label>
             <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              name="description" // Added name attribute for FormData
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -67,7 +66,7 @@ const VendorForm = () => {
             <label className="block text-gray-700">Image:</label>
             <input
               type="file"
-              onChange={(e) => setImage(e.target.files[0])}
+              name="image" // Added name attribute for FormData
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none"
             />
@@ -76,8 +75,7 @@ const VendorForm = () => {
             <label className="block text-gray-700">Price:</label>
             <input
               type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              name="price" // Added name attribute for FormData
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -85,8 +83,7 @@ const VendorForm = () => {
           <div className="mb-4">
             <label className="block text-gray-700">Category:</label>
             <select
-              value={category}
-              onChange={handleCategoryChange}
+              name="category" // Added name attribute for FormData
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
@@ -97,27 +94,11 @@ const VendorForm = () => {
               <option value="vehicles">Vehicles</option>
             </select>
           </div>
-          {category && (
-            <div className="mb-4">
-              <label className="block text-gray-700">Sub-Category:</label>
-              <select
-                value={subCategory}
-                onChange={(e) => setSubCategory(e.target.value)}
-                required
-                className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select a sub-category</option>
-                {categories[category].map((sub) => (
-                  <option key={sub} value={sub}>{sub}</option>
-                ))}
-              </select>
-            </div>
-          )}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+            className="w-[150px] flex justify-center mx-auto bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
           >
-            Post Advert
+            Post 
           </button>
         </form>
       </div>
