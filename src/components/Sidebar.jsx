@@ -60,11 +60,11 @@ const Sidebar = () => {
           <Link to="/dashboard/vendor-dashboard" className="block p-4 hover:bg-gray-700">
             {isOpen ? 'My advert' : <i className="fas fa-tachometer-alt"></i>}
           </Link>
-          <Link to="/post" className="block p-4 hover:bg-gray-700">
+          <Link to="/vendorfor" className="block p-4 hover:bg-gray-700">
             {isOpen ? 'Post Ad' : <i className="fas fa-box"></i>}
           </Link>
-          <Link to="/products" className="block p-4 hover:bg-gray-700">
-            {isOpen ? 'Products' : <i className="fas fa-tags"></i>}
+          <Link to="/overview" className="block p-4 hover:bg-gray-700">
+            {isOpen ? 'Overview' : <i className="fas fa-tags"></i>}
           </Link>
           <Link to="/settings" className="block p-4 hover:bg-gray-700">
             {isOpen ? 'Settings' : <i className="fas fa-cog"></i>}
