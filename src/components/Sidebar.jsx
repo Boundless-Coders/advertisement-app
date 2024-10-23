@@ -11,8 +11,8 @@ const Sidebar = () => {
   // Replace these with actual vendor data or API fetch logic
   const vendor = {
     profileImage: 'https://example.com/profile.jpg',  // Replace with actual URL
-    name: 'John Doe',
-    email: 'john.doe@example.com',
+    name: '',
+    email: '',
   };
 
   return (
@@ -22,7 +22,7 @@ const Sidebar = () => {
         {/* Sidebar Header */}
         <div className="flex items-center justify-between p-4">
           <h2 className={`text-2xl font-bold transition-all duration-300 ${!isOpen && 'hidden'}`}>
-            My adverts
+            My Dashboard
           </h2>
           <button
             onClick={toggleSidebar}
@@ -60,8 +60,8 @@ const Sidebar = () => {
           <Link to="/dashboard/vendor-dashboard" className="block p-4 hover:bg-gray-700">
             {isOpen ? 'My advert' : <i className="fas fa-tachometer-alt"></i>}
           </Link>
-          <Link to="/orders" className="block p-4 hover:bg-gray-700">
-            {isOpen ? 'Orders' : <i className="fas fa-box"></i>}
+          <Link to="/post" className="block p-4 hover:bg-gray-700">
+            {isOpen ? 'Post Ad' : <i className="fas fa-box"></i>}
           </Link>
           <Link to="/products" className="block p-4 hover:bg-gray-700">
             {isOpen ? 'Products' : <i className="fas fa-tags"></i>}
