@@ -15,7 +15,7 @@ const navigate = useNavigate()
 
     try {
         
-        //prepare data to be sent to backend
+        //prepare data to be sent to backe
         setLoading(true)
         const formData = new FormData(event.target) // takes data from the form
 
