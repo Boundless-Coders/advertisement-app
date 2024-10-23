@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
 import RootLayout from '../layouts/RootLayout';
+import { apiLogin } from '../services/auth';
 
 const LogInForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     // Add your sign-in logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
+    const formData = new FormData(event.target);
+    const email = formData.get("email")
+    const password = formData.get("password")
+
+    // console.log('Email:', email);
+    //console.log('Password:', password);
+    const response = await apiLogin({email, password});
+   // console.log(response.data);
+    if(response.status===200) {
+      localStorage.setItem("token", response.data.accessToken);
+    } 
+
   };
 
-  const handleGoogleLogIn = () => {
-    // Add your Google sign-in logic here
-    console.log('Login with Google');
-  };
+  // const handleGoogleLogIn = () => {
+  //   // Add your Google sign-in logic here
+  //   console.log('Login with Google');
+  // };
 
   return (
     <RootLayout>
@@ -25,20 +33,20 @@ const LogInForm = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
-              <input
+              <input name="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                
+                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-6">
               <label className="block text-gray-700">Password:</label>
-              <input
+              <input name="password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                
+                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -55,15 +63,7 @@ const LogInForm = () => {
             <span className="mx-4 text-gray-500">or</span>
             <hr className="flex-grow border-gray-300" />
           </div>
-          <div className="mt-4 flex flex-col space-y-2">
-            <button
-              onClick={handleGoogleLogIn}
-              className="flex items-center justify-center bg-red-600 text-white p-2 rounded-full hover:bg-red-700 transition w-10 h-10 mx-auto"
-              title="Login with Google"
-            >
-              G
-            </button>
-          </div>
+          
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               <a href="/register" className="text-green-500 hover:underline">
