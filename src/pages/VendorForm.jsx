@@ -1,42 +1,48 @@
-import React from 'react';
-import axios from 'axios'; // Ensure you have axios installed
+import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const VendorForm = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target); // Capture the form data
+    const formData = new FormData(event.target);
 
-    // Get values directly using FormData.get()
-    const title = formData.get('title');
-    const description = formData.get('description');
-    const image = formData.get('image');
-    const price = formData.get('price');
-    const category = formData.get('category');
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const image = formData.get("image");
+    const price = formData.get("price");
+    const category = formData.get("category");
 
-    // Log the values for debugging
-    console.log('Title:', title);
-    console.log('Description:', description);
-    console.log('Image:', image);
-    console.log('Price:', price);
-    console.log('Category:', category);
+    console.log("Title:", title);
+    console.log("Description:", description);
+    console.log("Image:", image);
+    console.log("Price:", price);
+    console.log("Category:", category);
 
-    // Perform the submission logic (e.g., API call)
     try {
-      // Make sure to adjust the URL and request method based on your backend setup
-      const response = await axios.post('http://localhost:6060/adverts', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      
-      // Alert success message
-      alert('Advert posted successfully!');
-      console.log('Response:', response.data); // Log the response for debugging
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/adverts`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      alert("Advert posted successfully!");
+      console.log("Response:", response.data);
+
+      navigate("/dashboard/vendor-dashboard");
+
     } catch (error) {
-      // Alert error message
-      alert('Error posting advert. Please try again.');
-      console.error('Error:', error.response ? error.response.data : error.message); // Log error details
+      alert("Error posting advert. Please try again.");
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -49,7 +55,7 @@ const VendorForm = () => {
             <label className="block text-gray-700">Title:</label>
             <input
               type="text"
-              name="title" // Added name attribute for FormData
+              name="title"
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -57,7 +63,7 @@ const VendorForm = () => {
           <div className="mb-4">
             <label className="block text-gray-700">Description:</label>
             <textarea
-              name="description" // Added name attribute for FormData
+              name="description"
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -66,7 +72,7 @@ const VendorForm = () => {
             <label className="block text-gray-700">Image:</label>
             <input
               type="file"
-              name="image" // Added name attribute for FormData
+              name="image"
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none"
             />
@@ -74,8 +80,8 @@ const VendorForm = () => {
           <div className="mb-4">
             <label className="block text-gray-700">Price:</label>
             <input
-              type="number"
-              name="price" // Added name attribute for FormData
+              type="text"
+              name="price"
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -83,7 +89,7 @@ const VendorForm = () => {
           <div className="mb-4">
             <label className="block text-gray-700">Category:</label>
             <select
-              name="category" // Added name attribute for FormData
+              name="category"
               required
               className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
@@ -98,7 +104,7 @@ const VendorForm = () => {
             type="submit"
             className="w-[150px] flex justify-center mx-auto bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
           >
-            Post 
+            Post
           </button>
         </form>
       </div>
