@@ -4,7 +4,7 @@ import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail, Heart } fr
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white font-sans">
+    <footer className="bg-[#13363A] text-white font-sans">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import RootLayout from "../layouts/RootLayout";
 
 const VendorForm = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const VendorForm = () => {
       alert("Advert posted successfully!");
       console.log("Response:", response.data);
 
-      navigate("/dashboard/vendor-dashboard");
+      navigate("/dashboard");
 
     } catch (error) {
       alert("Error posting advert. Please try again.");
@@ -47,8 +48,9 @@ const VendorForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-2 rounded-lg shadow-md w-96">
+   <RootLayout>
+     <div className="flex items-center justify-center min-h-screen bg-gray-400 ">
+      <div className="bg-white p-2 rounded-lg shadow-md w-96 mt-32 mb-16">
         <h2 className="text-2xl font-bold mb-6 text-center">Post an Advert</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -109,6 +111,7 @@ const VendorForm = () => {
         </form>
       </div>
     </div>
+   </RootLayout>
   );
 };
 
