@@ -35,9 +35,9 @@ const HomePage = () => {
     console.log(`Searching for: ${query}, in category: ${category}`);
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Display loading message
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>; // Display loading message
+  // }
 
   if (error) {
     return <div>Error: {error}</div>; // Display error message
