@@ -1,42 +1,49 @@
 import RootLayout from '../layouts/RootLayout';
 import { apiLogin } from '../services/auth';
+import { toast } from 'react-toastify';
 
 const LogInForm = () => {
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Add your sign-in logic here
+    // Sign-in logic
     const formData = new FormData(event.target);
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    // console.log('Email:', email);
-    //console.log('Password:', password);
-    const response = await apiLogin({email, password});
-   // console.log(response.data);
-    if(response.status===200) {
-      localStorage.setItem("token", response.data.accessToken);
-    } 
+    try {
+      const response = await apiLogin({ email, password });
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.accessToken);
+        
+        alert("Login successful!");
+      console.log("Response:", response.data);
 
+      //get user profile
+      // const profileResponse = await apiGetPofile();
+      //  console.log(profileResponse.data)
+
+      } 
+    } catch (error) {
+      console.error("Login failed:", error);
+      
+      alert("Login failed. Please try again.");
+      console.log("Response:", response.data);
+
+    }
   };
-
-  // const handleGoogleLogIn = () => {
-  //   // Add your Google sign-in logic here
-  //   console.log('Login with Google');
-  // };
-
+  
   return (
     <RootLayout>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 mx-24 my-10">
-        <div className="bg-white p-8 rounded-lg shadow-md w-96">
+    
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-md w-96 relative mt-32 mb-10">
           <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
               <input name="email"
                 type="email"
-                
-                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -45,8 +52,6 @@ const LogInForm = () => {
               <label className="block text-gray-700">Password:</label>
               <input name="password"
                 type="password"
-                
-                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />

@@ -4,48 +4,40 @@ import RootLayout from '../layouts/RootLayout';
 import { apiSignup } from '../services/auth';
 
 const RegisterForm = ({ role = 'user/vendor' }) => {  
-  
-  const [loading, setLoading] = useState(true)
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
-    event.preventDefault() // prevent the page from reloading
+    event.preventDefault();
 
     try {
-        
-      //prepare data to be sent to backend
-      setLoading(true)
-      const formData = new FormData(event.target) // takes data from the form
+      setLoading(true);
+      const formData = new FormData(event.target);
 
-      const name = formData.get("name")
-      const email = formData.get("email")
-      const password = formData.get("password")
-      
-       const role = formData.get("role")
-      console.log("name", name)
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const password = formData.get("password");
+      const role = formData.get("role");
 
+      const payload = { name, email, password, role: "user" };
+      const response = await apiSignup(payload);
 
-      const payload = {name, email, password, role:"user"}
-      const response = await apiSignup(payload)
-      console.log(response.data)
-      navigate("/login")
-      
-  } catch (error) {
-     console.log(error) 
-  } finally{
-      setLoading(false)
-  }
- 
-  
-};
+      if (response.status === 200) {
+        window.alert("Registration successful!");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      window.alert("Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  
-
-  
   return (
     <RootLayout>
       <div className="flex items-center justify-center min-h-screen bg-gray-400 pt-32 pb-10">
         <div className="bg-white p-8 rounded-lg shadow-md w-96 relative">
-         
           <div className="absolute top-4 right-4 text-sm font-semibold text-gray-600">
             <Link to="/register" className="text-blue-500 hover:underline mx-1">
               User
@@ -60,30 +52,27 @@ const RegisterForm = ({ role = 'user/vendor' }) => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700">Name:</label>
-              <input name='name'
+              <input
+                name="name"
                 type="text"
-                
-                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
-              <input name='email'
+              <input
+                name="email"
                 type="email"
-               
-                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Password:</label>
-              <input name='password'
+              <input
+                name="password"
                 type="password"
-                
-                
                 required
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
