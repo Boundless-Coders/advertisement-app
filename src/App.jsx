@@ -14,6 +14,8 @@ import VendorDashboard from "./pages/dashboard/VendorDashboard";
 import HomePage from "./pages/HomePage";
 import VendorForm from "./pages/VendorForm";
 import VendorRegisterForm from "./pages/VendorRegisterForm";
+import EditAdvert from "./pages/dashboard/EditAdvert";
+import AdvertDetails from "./pages/dashboard/AdvertDetails";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,10 +35,7 @@ function App() {
       path: "/about",
       element: <About />,
     },
-    {
-      path: "/advert/:id",
-      element: <AdvertDetail />,
-    },
+    
 
     {
       path: "/vendor",
@@ -46,19 +45,31 @@ function App() {
       path: "/register-vendor",
       element: <VendorRegisterForm />,
     },
+    
 
     {
       path: "/dashboard",
       element: <DashboardLayout />,
       children: [
+        
+        {
+          index: true,
+          element: <VendorDashboard />,
+        },
         {
           path: "settings",
           element: <Settings />,
         },
+       
         {
-          path: "vendor-dashboard",
-          element: <VendorDashboard />,
+          path: "advert-details/:id",
+          element: <AdvertDetails/>,
         },
+        {
+          path: "edit-advert/:id",
+          element: <EditAdvert/>,
+        },
+
       ],
     },
   ]);

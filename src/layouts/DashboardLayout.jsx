@@ -4,9 +4,9 @@ import { Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
   return (
-    <div>
+    <div className='flex flex-row items-start'>
         <Sidebar/>
-        <Outlet/>
+        <Outlet />
     </div>
   );
 };

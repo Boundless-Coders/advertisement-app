@@ -101,12 +101,12 @@ const About = () => {
   return (
     <RootLayout>
       <div className="min-h-screen ">
-        <div className="container mx-auto px-4 py-16">
+        <div className="mx-auto pt-32   px-4 py-16">
           <motion.h1
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0 }}
-            className="text-5xl font-bold mb-8 text-purple-700 text-center"
+            className="text-5xl ml-28 font-bold mb-8 text-[#13363A] "
           >
             About ClassyAd
           </motion.h1>
@@ -114,7 +114,7 @@ const About = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-purple-300 shadow-xl rounded-lg p-8 mb-16"
+            className="bg-purple-300 shadow-xl rounded-lg p-8 mb-16 mx-24"
           >
             <p className="text-lg mb-4 text-gray-700 leading-relaxed">
               ClassyAd is dedicated to revolutionizing the way businesses advertise online. We provide cutting-edge solutions to help you reach your target audience effectively and efficiently.
@@ -128,12 +128,12 @@ const About = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="mb-16 bg-purple-300 rounded-lg"
+            className="mb-16 bg-purple-300 rounded-lg mx-24 shadow-xl"
           >
             <h2 className="text-4xl font-semibold text-purple-700 mb-8 text-center pt-8">
               Our Features
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-4 pb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-8 pb-8">
               {features.map((feature, index) => (
                 <FeatureCard key={index} {...feature} />
               ))}
@@ -144,13 +144,13 @@ const About = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }} 
             transition={{ delay: 0.6, duration: 0.5 }}
-            className='bg-purple-300 rounded-lg'
+            className='bg-purple-300 rounded-lg shadow-xl mx-24'
           >
-            <h2 className="text-4xl font-semibold text-purple-700 mb-8 text-center pt-8">Our Team</h2>
+            <h2 className="text-4xl font-semibold text-purple-900 mb-8 text-center pt-8">Our Team</h2>
             <p className="text-lg mb-8 text-center text-gray-700 max-w-3xl mx-auto">
               ClassyAd is powered by a passionate team of marketing experts, software engineers, and creative minds. We're committed to continually improving our platform to meet the evolving needs of businesses in the digital advertising landscape.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 pb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-8 pb-8">
               {teamMembers.map((member, index) => (
                 <TeamMember key={index} {...member} />
               ))}

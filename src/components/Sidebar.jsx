@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, Route, Routes } from 'react-router-dom'; 
+import VendorDashboard from '../pages/dashboard/VendorDashboard';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,15 +11,15 @@ const Sidebar = () => {
 
   // Replace these with actual vendor data or API fetch logic
   const vendor = {
-    profileImage: 'https://example.com/profile.jpg',  // Replace with actual URL
+    profileImage: '',    
     name: '',
     email: '',
   };
 
   return (
-    <div className="flex">
+    <div className="h-screen sticky top-0">
       {/* Sidebar */}
-      <div className={`bg-gray-800 text-white h-screen ${isOpen ? 'w-64' : 'w-20'} transition-all duration-300`}>
+      <div className={`bg-[#163b41] text-white h-screen ${isOpen ? 'w-64' : 'w-20'} transition-all duration-300`}>
         {/* Sidebar Header */}
         <div className="flex items-center justify-between p-4">
           <h2 className={`text-2xl font-bold transition-all duration-300 ${!isOpen && 'hidden'}`}>
@@ -56,27 +57,29 @@ const Sidebar = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="mt-4">
-          <Link to="/dashboard/vendor-dashboard" className="block p-4 hover:bg-gray-700">
+        <div className="mt-4 ">
+        <Link to="/" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
+            {isOpen ? 'Home' : <i className="fa fa-tachometer-alt"></i>}
+          </Link>
+          <Link to="/dashboard" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
             {isOpen ? 'My advert' : <i className="fas fa-tachometer-alt"></i>}
           </Link>
-          <Link to="/vendorfor" className="block p-4 hover:bg-gray-700">
-            {isOpen ? 'Post Ad' : <i className="fas fa-box"></i>}
+          <Link to="/vendor" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
+            {isOpen ? 'Post Ad' : <i className="fa fa-box"></i>}
           </Link>
-          <Link to="/overview" className="block p-4 hover:bg-gray-700">
-            {isOpen ? 'Overview' : <i className="fas fa-tags"></i>}
+          <Link to="/overview" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
+            {isOpen ? 'Overview' : <i className="fa fa-tags"></i>}
           </Link>
-          <Link to="/settings" className="block p-4 hover:bg-gray-700">
-            {isOpen ? 'Settings' : <i className="fas fa-cog"></i>}
+          <Link to="/settings" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
+            {isOpen ? 'Settings' : <i className="fa fa-cog"></i>}
+          </Link>
+          <Link to="" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
+            {isOpen ? 'Logout' : <i className="fa fa-cog"></i>}
           </Link>
         </div>
       </div>
 
-      {/* Main Content Area */}
-      {/* <div className="flex-1 p-6 bg-gray-100">
-        <h1 className="text-3xl font-semibold mb-4">Welcome, {vendor.name}</h1> */}
-        {/* Main content goes here */}
-      {/* </div> */}
+     
     </div>
   );
 };

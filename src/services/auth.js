@@ -12,8 +12,11 @@ export const apiSignup = async (payload) => {
 
 
 export const apiLogin = async (payload) => {
-
     return await apiClient.post ("/users/login", payload);
+}
+
+export const apiProfile = async () => {
+    return await apiClient.post ("/users/profile");
 }
 
 //implicit return
