@@ -4,7 +4,7 @@ import { apiSignup } from '../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import '../components/AuroraBackground';
+
 
 const VendorRegisterForm = () => {
 

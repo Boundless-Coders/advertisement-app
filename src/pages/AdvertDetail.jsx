@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Ensure this is imported
 
-const SingleDetail = () => {
+const AdvertDetail = () => {
   const { id } = useParams(); // Get the advert ID from the URL
   const [advert, setAdvert] = useState(null); // State to hold the advert details
   const [loading, setLoading] = useState(true);
@@ -77,4 +77,4 @@ const SingleDetail = () => {
   );
 };
 
-export default SingleDetail;
+export default AdvertDetail;

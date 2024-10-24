@@ -5,7 +5,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Overview from "./pages/dashboard/Overview";
 import Settings from "./pages/dashboard/Settings";
 import About from "./pages/About";
-import AdvertDetail from "./pages/AdvertDetail";
+
 
 import LogInForm from "./pages/LogInForm";
 import RegisterForm from "./pages/RegisterForm";
@@ -16,6 +16,8 @@ import VendorForm from "./pages/VendorForm";
 import VendorRegisterForm from "./pages/VendorRegisterForm";
 import EditAdvert from "./pages/dashboard/EditAdvert";
 import AdvertDetails from "./pages/dashboard/AdvertDetails";
+import AdvertDetail from "./pages/AdvertDetail";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -36,10 +38,13 @@ function App() {
       element: <About />,
     },
     
-
     {
       path: "/vendor",
       element: <VendorForm />,
+    },
+    {
+      path: "/adverts/:id",
+      element: <AdvertDetail/>
     },
     {
       path: "/register-vendor",
