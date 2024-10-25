@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { div } from 'framer-motion/client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Ensure this is imported
+import Navbar from '../components/Navbar';
 
 const AdvertDetail = () => {
   const { id } = useParams(); // Get the advert ID from the URL
@@ -38,9 +40,11 @@ const AdvertDetail = () => {
   }
 
   return (
-    <div className="container mx-auto my-10 flex space-x-4"> {/* Flex container */}
+ <div>
+  <Navbar/>
+     <div className="container mx-auto relative mt-10  my-10 flex space-x-4"> {/* Flex container */}
       {/* First Container */}
-      <div className="bg-gray-200 shadow-md rounded-lg p-6 w-1/2 flex flex-col"> {/* Updated color */}
+      <div className="bg-gray-200  shadow-md rounded-lg p-6 w-1/2 flex relative mt-32 flex-col"> {/* Updated color */}
         {/* Advert Title */}
         <h1 className="text-3xl font-bold mb-4">{advert.title}</h1>
 
@@ -48,7 +52,7 @@ const AdvertDetail = () => {
         <img
           src={`https://savefiles.org/${advert.image}?shareable_link=439`} // Updated image URL
           alt={advert.title}
-          className="w-full h-64 object-cover rounded mb-4"
+          className="w-full h-96 object-cover rounded mb-4"
         />
 
         {/* Price */}
@@ -69,11 +73,12 @@ const AdvertDetail = () => {
       </div>
 
       {/* Second Container (for description) */}
-      <div className="bg-gray-200 shadow-md rounded-lg p-6 w-1/2 flex flex-col"> {/* Same color */}
+      <div className="bg-gray-200 shadow-md rounded-lg p-6 w-1/2 flex relative mt-32 flex-col"> {/* Same color */}
         <h2 className="text-xl font-bold mb-4">Description</h2>
         <p className="text-gray-700">{advert.description}</p> {/* Display advert description here */}
       </div>
     </div>
+ </div>
   );
 };
 
