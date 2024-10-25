@@ -19,6 +19,7 @@ import AdvertDetails from "./pages/dashboard/AdvertDetails";
 import AdvertDetail from "./pages/AdvertDetail";
 import AdPage from "./pages/AdPage";
 import { CarIcon } from "lucide-react";
+import VendorLogin from "./pages/VendorLogin";
 
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
     },
     {
       path: "/login-vendor",
-      element: <VendorLogin/> 
+      element:  <VendorLogin />
     },
     {
       path: "/register-vendor",
