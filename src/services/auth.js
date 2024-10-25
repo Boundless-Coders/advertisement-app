@@ -15,8 +15,8 @@ export const apiLogin = async (payload) => {
     return await apiClient.post ("/users/login", payload);
 }
 
-export const apiProfile = async () => {
-    return await apiClient.post ("/users/profile");
+export const apiProfile = async (payload) => {
+    return await apiClient.post ("/profile", payload);
 }
 
 //implicit return
