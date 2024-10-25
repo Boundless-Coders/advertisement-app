@@ -18,7 +18,7 @@ const VendorLogin = () => {
       const response = await apiLogin({ email, password });
       if (response.status === 200) {
         localStorage.setItem("token", response.data.accessToken);
-        toast.success("Login successful!", { autoClose: 3000 });
+        alert('Logged in successfully');
         navigate("/vendor");
       }
     } catch (error) {

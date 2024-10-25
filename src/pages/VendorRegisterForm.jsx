@@ -48,7 +48,7 @@ const VendorRegisterForm = () => {
     <RootLayout>
       <ToastContainer /> {/* Toast container for displaying notifications */}
       <div className='h-fit'>
-        <div className="pt-32 flex items-center justify-center min-h-screen bg-gradient-to-r bg-gray-400 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="pt-32 flex items-center justify-center min-h-screen bg-gradient-to-r bg-blue-100 py-12 px-4 sm:px-6 lg:px-8">
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg border border-gray-200">
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
               Vendor Registration

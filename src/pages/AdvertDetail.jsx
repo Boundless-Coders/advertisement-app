@@ -2,7 +2,8 @@ import axios from 'axios';
 import { div } from 'framer-motion/client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Ensure this is imported
-import Navbar from '../components/Navbar';
+
+import RootLayout from '../layouts/RootLayout';
 
 const AdvertDetail = () => {
   const { id } = useParams(); // Get the advert ID from the URL
@@ -40,45 +41,47 @@ const AdvertDetail = () => {
   }
 
   return (
- <div>
-  <Navbar/>
-     <div className="container mx-auto relative mt-10  my-10 flex space-x-4"> {/* Flex container */}
-      {/* First Container */}
-      <div className="bg-gray-200  shadow-md rounded-lg p-6 w-1/2 flex relative mt-32 flex-col"> {/* Updated color */}
-        {/* Advert Title */}
-        <h1 className="text-3xl font-bold mb-4">{advert.title}</h1>
+ <RootLayout>
+  <div>
+ 
+ <div className="container mx-auto relative mt-10  my-10 flex space-x-4"> {/* Flex container */}
+  {/* First Container */}
+  <div className="bg-gray-200  shadow-md rounded-lg p-6 w-1/2 flex relative mt-32 flex-col"> {/* Updated color */}
+    {/* Advert Title */}
+    <h1 className="text-3xl font-bold mb-4">{advert.title}</h1>
 
-        {/* Advert Image */}
-        <img
-          src={`https://savefiles.org/${advert.image}?shareable_link=439`} // Updated image URL
-          alt={advert.title}
-          className="w-full h-96 object-cover rounded mb-4"
-        />
+    {/* Advert Image */}
+    <img
+      src={`https://savefiles.org/${advert.image}?shareable_link=439`} // Updated image URL
+      alt={advert.title}
+      className="w-full h-96 object-cover rounded mb-4"
+    />
 
-        {/* Price */}
-        <p className="text-xl font-semibold mb-4">Price: ${advert.price}</p>
+    {/* Price */}
+    <p className="text-xl font-semibold mb-4">Price: ${advert.price}</p>
 
-        {/* Category */}
-        <p className="text-gray-600 mb-2">Category: {advert.category}</p>
+    {/* Category */}
+    <p className="text-gray-600 mb-2">Category: {advert.category}</p>
 
-        {/* Additional Features */}
-        <div className="mt-4">
-          <h2 className="text-xl font-bold mb-2"></h2>
-          <ul className="list-disc list-inside text-gray-600">
-            {advert.features && advert.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Second Container (for description) */}
-      <div className="bg-gray-200 shadow-md rounded-lg p-6 w-1/2 flex relative mt-32 flex-col"> {/* Same color */}
-        <h2 className="text-xl font-bold mb-4">Description</h2>
-        <p className="text-gray-700">{advert.description}</p> {/* Display advert description here */}
-      </div>
+    {/* Additional Features */}
+    <div className="mt-4">
+      <h2 className="text-xl font-bold mb-2"></h2>
+      <ul className="list-disc list-inside text-gray-600">
+        {advert.features && advert.features.map((feature, index) => (
+          <li key={index}>{feature}</li>
+        ))}
+      </ul>
     </div>
- </div>
+  </div>
+
+  {/* Second Container (for description) */}
+  <div className="bg-gray-200 shadow-md rounded-lg p-6 w-1/2 flex relative mt-32 flex-col"> {/* Same color */}
+    <h2 className="text-xl font-bold mb-4">Description</h2>
+    <p className="text-gray-700">{advert.description}</p> {/* Display advert description here */}
+  </div>
+</div>
+</div>
+ </RootLayout>
   );
 };
 
