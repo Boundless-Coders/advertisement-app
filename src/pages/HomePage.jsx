@@ -4,47 +4,60 @@ import RootLayout from "../layouts/RootLayout";
 import { Grid, List } from 'lucide-react'; // Import Lucide icons for grid and list views
 import { apiGetAdverts } from '../services/adverts'; // Adjust the import path to your api file
 import { Link } from "react-router-dom";
-import { Cable, Armchair, Shirt, Car } from "lucide-react";
+import axios from "axios";
 
 const HomePage = () => {
-  const [query, setQuery] = useState(""); 
-  const [category, setCategory] = useState(""); 
-  const [isGridView, setIsGridView] = useState(true); // State to toggle between grid and list view
-  const [items, setItems] = useState([]); // State to hold the adverts
-  const [loading, setLoading] = useState(true); // State for loading status
-  const [error, setError] = useState(null); // State for error handling
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("");
+  const [isGridView, setIsGridView] = useState(true);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchResults, setSearchResults] = useState([]); // For storing search results
 
-  // Fetch adverts on component mount
   useEffect(() => {
     const fetchAdverts = async () => {
       try {
         const response = await apiGetAdverts();
-        setItems(response.data); // Set the adverts data
+        setItems(response.data);
       } catch (err) {
-        setError(err.message); // Handle errors
+        setError(err.message);
       } finally {
-        setLoading(false); // Update loading state
+        setLoading(false);
       }
     };
 
     fetchAdverts();
   }, []);
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
-    console.log(`Searching for: ${query}, in category: ${category}`);
+    if (query.length < 3) {
+      setError("Please enter at least 3 characters.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`https://ads-app-backend-1.onrender.com/adverts?search=${query}&category=${category}`);
+      setSearchResults(response.data);
+      setError(null);
+    } catch (err) {
+      setError("Error fetching data");
+    }
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>; // Display loading message
-  // }
-
-  if (error) {
-    return <div>Error: {error}</div>; // Display error message
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const displayItems = searchResults.length > 0 ? searchResults : items;
+
   return (
-    <RootLayout> 
+    <RootLayout>
       {/* Hero Section */}
       <div className="relative text-center mb-10">
         <div className="relative w-full h-screen">
@@ -56,7 +69,7 @@ const HomePage = () => {
         </div>
 
         <div className="absolute inset-0 flex flex-col justify-center items-center">
-          <div className="text-center mb-10">
+          <div className="text-center text-white mb-10">
             <h1 className="font-bold text-5xl mb-5">Largest Classifieds In The World</h1>
             <p className="text-2xl">You can buy, sell anything you want</p>
           </div>
@@ -103,41 +116,6 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Feature Section with Images */}
-      
-        <div className="flex justify-center items-center min-h-[490px] bg-transparent pt-0 p-6 rounded-lg -mt-64 relative">
-          <div className="flex flex-wrap justify-center items-center gap-6 container md:gap-12">
-            <div className="box  p-6 shadow-lg bg-slate-600 rounded-lg text-center">
-              <span className="feature-icon w-12 h-12 mb-4 inline-flex justify-center items-center">
-                <Cable/>
-              </span>
-              <h3 className="text-xl mb-2">Electronics</h3>
-              <p className="text-gray-600 text-lg">20</p>
-            </div>
-            <div className="box p-6 shadow-lg bg-slate-600 rounded-lg text-center">
-              <span className="feature-icon w-12 h-12 mb-4 inline-flex justify-center items-center">
-                <Armchair/>
-              </span>
-              <h3 className="text-xl mb-2">Furniture</h3>
-              <p className="text-white text-lg">10</p>
-            </div>
-            <div className="box bg-slate-600 p-6 shadow-lg rounded-lg text-center">
-              <span className="feature-icon w-12 h-12 mb-4 inline-flex  justify-center items-center">
-                < Shirt/>
-              </span>
-              <h3 className="text-xl mb-2">Fashion</h3>
-              <p className="text-white text-lg">30</p>
-            </div>
-            <div className="box bg-slate-600 p-6 shadow-lg rounded-lg text-center">
-              <span className="feature-icon w-12 h-12 mb-4 inline-flex  justify-center items-center">
-                < Car/>
-              </span>
-              <h3 className="text-xl mb-2">Vehicles</h3>
-              <p className="text-white text-lg">30</p>
-            </div>
-          </div>
-        </div>
-
       {/* Toggle View Buttons for Grid/List */}
       <div className="flex justify-end my-6 gap-4 mx-8">
         <button
@@ -156,10 +134,9 @@ const HomePage = () => {
 
       {/* Items Section */}
       <div className={`grid ${isGridView ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-1'} gap-2`}>
-        {items.map((item) => (
+        {displayItems.map((item) => (
           <div key={item.id} className="mb-16">
-            <div className="flex-col rounded-md bg-gray-200 flex flex-wrap gap-2 p-4 justify-center items-center mt-6 mx-10">
-              {/* Include the image URL here */}
+            <div className="flex-col rounded-md bg-blue-100 flex flex-wrap gap-2 p-4 justify-center items-center mt-6 mx-10">
               <img 
                 src={`https://savefiles.org/${item.image}?shareable_link=439`} 
                 alt={item.title} 
