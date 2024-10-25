@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RootLayout from '../layouts/RootLayout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { apiLogin } from '../services/auth';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const LogInForm = () => {
-  const [role, setRole] = useState("user"); // Define role state
-
+const VendorLogin = () => {
+    const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -20,6 +19,7 @@ const LogInForm = () => {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Login successful!", { autoClose: 3000 });
+        navigate("/vendor");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -30,29 +30,10 @@ const LogInForm = () => {
   return (
     <RootLayout>
       <div className="flex items-center justify-center min-h-screen bg-blue-100">
-        <div className="bg-white p-8 rounded-lg shadow-md w-96 max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mt-20 mb-10 mx-4 sm:mx-auto relative">
+        <div className="bg-white p-8 rounded-lg shadow-md w-96 max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mt-20 mb-10 mx-4 sm:mx-auto">
 
-          {/* Role selection as links at the top right corner */}
-          <div className="absolute top-4 right-4 text-sm font-semibold text-gray-600">
-            <Link
-              to="/login"
-              onClick={() => setRole("user")}
-              className={`text-blue-500 hover:underline mx-1 ${role === 'user' ? 'font-bold' : ''}`}
-            >
-              User
-            </Link>
-            /
-            <Link
-              to="/login-vendor"
-              onClick={() => setRole("vendor")}
-              className={`text-blue-500 hover:underline mx-1 ${role === 'vendor' ? 'font-bold' : ''}`}
-            >
-              Vendor
-            </Link>
-          </div>
-
-          <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-
+        
+          <h2 className="text-2xl font-bold mb-6 text-center"> Vendor Login</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
@@ -63,7 +44,7 @@ const LogInForm = () => {
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-6">
               <label className="block text-gray-700">Password:</label>
               <input
                 name="password"
@@ -72,7 +53,6 @@ const LogInForm = () => {
                 className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
             <button
               type="submit"
               className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
@@ -98,6 +78,7 @@ const LogInForm = () => {
               </a>
             </p>
           </div>
+          
         </div>
       </div>
       <ToastContainer />
@@ -105,4 +86,4 @@ const LogInForm = () => {
   );
 };
 
-export default LogInForm;
+export default VendorLogin;
