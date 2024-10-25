@@ -59,7 +59,7 @@ const VendorDashboard = () => {
 
 
   return (
-    <div className="container mx-auto p-4 bg-amber-100">
+    <div className="container mx-auto p-4 bg-blue-100">
       <h1 className="text-2xl font-bold mb-6">Your Adverts</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {adverts && adverts.map((advert) => (

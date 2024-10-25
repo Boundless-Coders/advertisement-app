@@ -1,20 +1,46 @@
-import React, { useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom'; 
-import VendorDashboard from '../pages/dashboard/VendorDashboard';
+import axios from 'axios';
+import React, {   useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; 
+
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [vendor, setVendor] = useState({
+    // profileImage: '',
+    role: '',
+    name: '',
+    email: '',
+    contactNumber: '',
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  // Replace these with actual vendor data or API fetch logic
-  const vendor = {
-    profileImage: '',    
-    name: '',
-    email: '',
-  };
+  // Fetch vendor data from API using axios
+  useEffect(() => {
+    const fetchVendorData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/profile'); // Update this URL to your API endpoint
+        setVendor({
+          // profileImage: response.data.profileImage,
+          role: response.data.role,
+          name: response.data.name,
+          email: response.data.email,
+          contactNumber: response.data.contactNumber,
+        });
+      } catch (err) {
+        setError('Failed to fetch vendor data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVendorData();
+  }, []);
 
   return (
     <div className="h-screen sticky top-0">
@@ -43,22 +69,34 @@ const Sidebar = () => {
 
         {/* Vendor Profile */}
         <div className="p-4 flex flex-col items-center">
-          <img
-            className={`rounded-full object-cover transition-all duration-300 ${isOpen ? 'w-16 h-16' : 'w-10 h-10'}`}
-            src={vendor.profileImage}
-            alt="Vendor profile"
-          />
-          {isOpen && (
-            <div className="text-center mt-2">
-              <h3 className="text-xl font-semibold">{vendor.name}</h3>
-              <p className="text-sm text-gray-400">{vendor.email}</p>
-            </div>
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : (
+            <>
+              {/* {vendor.profileImage && (
+                <img
+                  className={`rounded-full object-cover transition-all duration-300 ${isOpen ? 'w-16 h-16' : 'w-10 h-10'}`}
+                  src={vendor.profileImage}
+                  alt="Vendor profile"
+                />
+              )} */}
+              {isOpen && (
+                <div className="text-center mt-2">
+                  <h3 className="text-xl font-semibold">{vendor.role}</h3>
+                  <h3 className="text-xl font-semibold">{vendor.name}</h3>
+                  <p className="text-sm text-gray-400">{vendor.email}</p>
+                  <p className="text-sm text-gray-400">{vendor.contactNumber}</p>
+                </div>
+              )}
+            </>
           )}
         </div>
 
         {/* Navigation Links */}
-        <div className="mt-4 ">
-        <Link to="/" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
+        <div className="mt-4">
+          <Link to="/" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
             {isOpen ? 'Home' : <i className="fa fa-tachometer-alt"></i>}
           </Link>
           <Link to="/dashboard" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
@@ -74,12 +112,10 @@ const Sidebar = () => {
             {isOpen ? 'Settings' : <i className="fa fa-cog"></i>}
           </Link>
           <Link to="" className="block p-4 hover:bg-gray-700 text-lg font-semibold">
-            {isOpen ? 'Logout' : <i className="fa fa-cog"></i>}
+            {isOpen ? 'Logout' : <i className="fa fa-sign-out-alt"></i>}
           </Link>
         </div>
       </div>
-
-     
     </div>
   );
 };
