@@ -42,7 +42,7 @@ const VendorForm = () => {
 
   return (
     <RootLayout>
-      <div className="flex items-center justify-center min-h-screen bg-blue-1+00 ">
+      <div className="flex items-center justify-center min-h-screen bg-blue-100 ">
         <div className="bg-white p-6 rounded-lg shadow-md w-96 mt-32 mb-16">
           <h2 className="text-2xl font-bold mb-6 text-center">Post an Advert</h2>
           <form onSubmit={handleSubmit}>
